@@ -5,9 +5,9 @@ using TestWebApi.Interfaces;
 using TestWebApi.Models.Requests;
 using System.Collections.Generic;
 
-namespace TestWebApi.Controllers
+namespace TestWebApi.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class GroupsController : ControllerBase
     {

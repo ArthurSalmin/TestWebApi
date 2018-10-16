@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TestWebApi.Models.Responses
+﻿namespace TestWebApi.Models.Responses
 {
     public class StudentResponse
     {

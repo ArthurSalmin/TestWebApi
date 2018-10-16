@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TestWebApi.Models;
 using TestWebApi.Interfaces;
-using TestWebApi.Repositories;
 using TestWebApi.Models.Requests;
 using TestWebApi.Models.Responses;
 
-namespace TestWebApi.Controllers
+namespace TestWebApi.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class StudentsController : ControllerBase
     {
