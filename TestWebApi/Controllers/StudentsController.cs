@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using TestWebApi.Models;
 using TestWebApi.Interfaces;
 using TestWebApi.Repositories;
+using TestWebApi.Models.Requests;
+using TestWebApi.Models.Responses;
 
 namespace TestWebApi.Controllers
 {
@@ -20,27 +22,32 @@ namespace TestWebApi.Controllers
         {
             _studentRepository = studentRepository;
         }
+
         [Route("Create")]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]StudentModel student)
+        public async Task<IActionResult> Post([FromBody]StudentRequest studentRequest)
         {
-            if (student == null)
+            if (studentRequest == null)
             {
                 return BadRequest();
             }
-            await _studentRepository.PostAsync(student);
-            return Ok();
+
+            var model = studentRequest.ToModel();
+            var newStudent = await _studentRepository.PostAsync(model);
+            return Ok(StudentResponse.Create(newStudent));
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var students = await _studentRepository.GetAsync();
-            if (students == null)
+            List<StudentResponse> allStudents = new List<StudentResponse>();
+            foreach (var item in students)
             {
-                return NotFound();
+                allStudents.Add(StudentResponse.Create(item));
             }
-            return Ok(students);
+
+            return Ok(allStudents);
         }
 
         [HttpGet("Names")]
@@ -51,6 +58,7 @@ namespace TestWebApi.Controllers
             {
                 return NotFound();
             }
+
             return Ok(studentsNames);
         }
 
@@ -61,12 +69,15 @@ namespace TestWebApi.Controllers
             {
                 return BadRequest();
             }
+
             var student = await _studentRepository.GetAsync(id);
             if (student == null)
             {
                 return NotFound();
             }
-            return Ok(student);
+
+            var response = StudentResponse.Create(student);
+            return Ok(response);
         }
 
         [HttpPut]
@@ -76,11 +87,14 @@ namespace TestWebApi.Controllers
             {
                 return BadRequest();
             }
+
             var changedStudent = await _studentRepository.PutAsync(student);
             if (changedStudent == null)
             {
                 return NotFound();
             }
+
+            var response = StudentResponse.Create(changedStudent);
             return Ok(changedStudent);
 
         }
@@ -92,6 +106,7 @@ namespace TestWebApi.Controllers
             {
                 return BadRequest();
             }
+
             await _studentRepository.Delete(id);
             return Ok();
         }

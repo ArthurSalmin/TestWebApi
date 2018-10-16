@@ -37,7 +37,11 @@ namespace TestWebApi.Repositories
         {
             return await _dbContext.Groups.FirstOrDefaultAsync(x => x.Id == id);
         }
-        
+
+        public async Task<List<string>> GetNamesAsync()
+        {
+            return await _dbContext.Groups.Select(x => x.Name).ToListAsync();
+        }
 
         public async Task<GroupModel> PostAsync(GroupModel obj)
         {
@@ -56,5 +60,7 @@ namespace TestWebApi.Repositories
             await _dbContext.SaveChangesAsync();
             return obj;
         }
+
+
     }
 }

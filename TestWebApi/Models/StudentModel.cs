@@ -9,6 +9,6 @@ namespace TestWebApi.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Group_id { get; set; }
+        public int Group_id { get; set; }
     }
 }

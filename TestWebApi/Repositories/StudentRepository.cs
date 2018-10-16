@@ -15,9 +15,9 @@ namespace TestWebApi.Repositories
             _dbContext = context;
             if (!_dbContext.Students.Any())
             {
-                _dbContext.Students.Add(new StudentModel { Group_id = "401", Name = "Arthur"  });
-                _dbContext.Students.Add(new StudentModel { Group_id = "402", Name = "Andrew" });
-                _dbContext.Students.Add(new StudentModel { Group_id = "403", Name = "Alex" });
+                _dbContext.Students.Add(new StudentModel { Group_id = 1, Name = "Arthur"  });
+                _dbContext.Students.Add(new StudentModel { Group_id = 2, Name = "Andrew" });
+                _dbContext.Students.Add(new StudentModel { Group_id = 3, Name = "Alex" });
                 _dbContext.SaveChanges();
             }
         }
@@ -41,6 +41,11 @@ namespace TestWebApi.Repositories
         public async Task<List<string>> GetNamesAsync()
         {
             return await _dbContext.Students.Select(x => x.Name).ToListAsync();
+        }
+
+        public async Task<List<StudentModel>> GetStudentsByGroupIdAsync(int groupId)
+        {
+            return await _dbContext.Students.Where(x => x.Group_id == groupId).ToListAsync();
         }
 
         public async Task<StudentModel> PostAsync(StudentModel obj)

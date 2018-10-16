@@ -9,5 +9,6 @@ namespace TestWebApi.Interfaces
     public interface IStudentRepository : IBaseRepository<StudentModel>
     {
         Task<List<string>> GetNamesAsync();
+        Task<List<StudentModel>> GetStudentsByGroupIdAsync(int groupId);
     }
 }
