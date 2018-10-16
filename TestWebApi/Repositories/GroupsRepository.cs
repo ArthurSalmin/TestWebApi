@@ -24,8 +24,11 @@ namespace TestWebApi.Repositories
         public async Task Delete(int id)
         {
             GroupModel group = _dbContext.Groups.FirstOrDefault(x => x.Id == id);
-            _dbContext.Groups.Remove(group);
-            await _dbContext.SaveChangesAsync();
+            if (group != null)
+            {
+                _dbContext.Groups.Remove(group);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task<List<GroupModel>> GetAsync()

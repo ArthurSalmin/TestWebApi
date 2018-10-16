@@ -24,8 +24,11 @@ namespace TestWebApi.Repositories
         public async Task Delete(int id)
         {
             StudentModel student = _dbContext.Students.FirstOrDefault(x => x.Id == id);
-            _dbContext.Students.Remove(student);
-            await _dbContext.SaveChangesAsync();
+            if (student != null)
+            {
+                _dbContext.Students.Remove(student);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task<List<StudentModel>> GetAsync()

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TestWebApi.Models
+namespace TestWebApi.Models.Responses
 {
     public class GroupResponse
     {
