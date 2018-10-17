@@ -8,7 +8,6 @@ namespace TestWebApi.Models
         public DbSet<StudentModel> Students { get; set; }
         public UniversityContext(DbContextOptions<UniversityContext> options) : base(options)
         {
-            Database.EnsureCreated();
         }
     }
 }
