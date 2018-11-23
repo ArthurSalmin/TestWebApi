@@ -22,10 +22,9 @@ namespace TestWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //string connection = Configuration.GetConnectionString("DefaultConnection");
+            string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<UniversityContext>(options =>
-                //options.UseSqlServer(connection));
-                options.UseSqlite("Data Source=University.db"));
+                options.UseSqlServer(connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddTransient<IStudentRepository, StudentRepository>();
